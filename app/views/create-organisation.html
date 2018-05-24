@@ -23,7 +23,8 @@
         {{ govukInput ({
           "label": { "text": "Acronym" },
           "id": "org-acronym-input",
-          "name": "org-acronym"
+          "name": "org-acronym",
+          "classes": "govuk-input--width-10"
         }) }}
 
         {{ govukSelect ({
@@ -113,4 +114,22 @@
   </form>
 </main>
 
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('sponsoring-organisations-select'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('superceding-organisations-select'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+</script>
 {% endblock %}

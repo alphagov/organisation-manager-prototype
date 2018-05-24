@@ -12,6 +12,8 @@ $govuk-global-styles: true;
 @import 'patterns/check-your-answers';
 @import 'patterns/related-items';
 
+@import 'vendor/accessible-autocomplete';
+
 @import 'header';
 
 .code {
