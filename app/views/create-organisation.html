@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% block page_title %}Create organisation{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  <form action="/organisation-logo" method="post" class="form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+          Create organisation
+        </h1>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukInput ({
+          "label": { "text": "Title" },
+          "id": "org-title-input",
+          "name": "org-title"
+        }) }}
+
+        {{ govukInput ({
+          "label": { "text": "Acronym" },
+          "id": "org-acronym-input",
+          "name": "org-acronym"
+        }) }}
+
+        {{ govukSelect ({
+          "label": { "text": "Organisation type" },
+          "id": "org-type-select",
+          "name": "org-type",
+          "items": [
+            {"value": "adhoc_advisory_group", "text": "Adhoc advisory group"},
+            {"value": "advisory_ndpb", "text": "Advisory non-departmental public body"},
+            {"value": "civil_service", "text": "Civil service"},
+            {"value": "court", "text": "Court"},
+            {"value": "devolved_administration", "text": "Devolved administration"},
+            {"value": "executive_agency", "text": "Executive agency"},
+            {"value": "executive_ndpb", "text": "Executive non-departmental public body"},
+            {"value": "executive_office", "text": "Executive office"},
+            {"value": "independent_monitoring_body", "text": "Independent monitoring body"},
+            {"value": "ministerial_department", "text": "Ministerial department"},
+            {"value": "non_ministerial_department", "text": "Non-ministerial department"},
+            {"value": "other", "text": "Other"},
+            {"value": "public_corporation", "text": "Public corporation"},
+            {"value": "sub_organisation", "text": "Sub-organisation"},
+            {"value": "tribunal_ndpb", "text": "Tribunal non-departmental public body"}
+          ]
+        }) }}
+
+        {% set org_url %}
+          {{ govukInput ({
+            "label": { "text": "External URL" },
+            "id": "org-url-input",
+            "name": "org-url"
+          }) }}
+        {% endset -%}
+
+        {% set superceding_org %}
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="superceding-organisations-select">Superceded by</label>
+          <select id="superceding-organisations-select" name="superceding-organisations" class="govuk-select">
+            {% include "includes/organisation-select-options.html" %}
+          </select>
+        </div>
+        {% endset -%}
+
+        {{ govukRadios ({
+          "id-prefix": "org-status",
+          "name": "org-status",
+          "fieldset": {
+            "legend": {
+              "text": "Status on GOV.UK",
+              "isPageHeading": false,
+              "classes": 'govuk-fieldset__legend--m'
+            }
+          },
+          "items": [
+            {"value": "live", "text": "Currently live"},
+            {"value": "coming_soon", "text": "Coming soon"},
+            {
+              "value": "exempt",
+              "text": "Exempt from joining",
+              "conditional": {
+                "html": org_url
+              }
+            },
+            {"value": "tranistioning", "text": "Currently transitioning"},
+            {
+              "value": "closed",
+              "text": "Closed",
+              "conditional": {
+                "html": superceding_org
+              }
+            }
+          ]
+        }) }}
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="sponsoring-organisations-select">Sponsoring organisations</label>
+          <select id="sponsoring-organisations-select" name="sponsoring-organisations" class="govuk-select">
+            {% include "includes/organisation-select-options.html" %}
+          </select>
+        </div>
+
+        {{ govukButton ({
+          "text": "Save and continue"
+        })}}
+      </div>
+    </div>
+
+  </form>
+</main>
+
+{% endblock %}

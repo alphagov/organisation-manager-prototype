@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+{% block page_title %}Edit logo{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  {{ govukBackLink({
+    "text": "Back",
+    "href": "/create-organisation"
+  }) }}
+
+  <form action="/organisation-logo" method="post" class="form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+          Edit logo
+        </h1>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukRadios ({
+          "idPrefix": "org-crest-type",
+          "name": "org-crest-type",
+          "fieldset": {
+            "legend": {
+              "text": "Logo type",
+              "isPageHeading": false
+            }
+          },
+          "items": [
+            { "value": "", "text": "No identity" },
+            { "value": "", "text": "Single identity" },
+            { "value": "", "text": "Departmental crest" },
+            { "value": "", "text": "Custom logo" }
+          ]
+        })}}
+
+        {{ govukSelect ({
+          "label": { "text": "Brand colour" },
+          "id": "org-logo-brand-select",
+          "name": "org-logo-brand",
+          "items": [
+            {"value": "1", "text": "Attorney General's Office"},
+            {"value": "2", "text": "Cabinet Office"},
+            {"value": "3", "text": "Department for Business, Innovation & Skills"},
+            {"value": "4", "text": "Department for Communities and Local Government"},
+            {"value": "5", "text": "Department for Culture, Media & Sport"},
+            {"value": "6", "text": "Department for Education"},
+            {"value": "7", "text": "Department for Environment, Food & Rural Affairs"},
+            {"value": "8", "text": "Department for International Development"},
+            {"value": "9", "text": "Department for Transport"},
+            {"value": "10", "text": "Department for Work & Pensions"},
+            {"value": "11", "text": "Department of Energy & Climate Change"},
+            {"value": "12", "text": "Department of Health"},
+            {"value": "13", "text": "Foreign & Commonwealth Office"},
+            {"value": "14", "text": "HM Government"},
+            {"value": "15", "text": "HM Revenue & Customs"},
+            {"value": "16", "text": "HM Treasury"},
+            {"value": "17", "text": "Home Office"},
+            {"value": "18", "text": "Ministry of Defence"},
+            {"value": "19", "text": "Ministry of Justice"},
+            {"value": "20", "text": "Northern Ireland Office"},
+            {"value": "21", "text": "Office of the Advocate General for Scotland"},
+            {"value": "22", "text": "Office of the Leader of the House of Lords"},
+            {"value": "23", "text": "Scotland Office"},
+            {"value": "24", "text": "Office of the Leader of the House of Commons"},
+            {"value": "25", "text": "UK Export Finance"},
+            {"value": "26", "text": "UK Trade & Investment"},
+            {"value": "27", "text": "Wales Office"},
+            {"value": "28", "text": "Civil Service"},
+            {"value": "29", "text": "Department for International Trade"}
+          ]
+        }) }}
+
+        {{ govukTextarea ({
+          "id": "org-logo-formatted-title-textarea",
+          "name": "org-logo-formatted-title",
+          "label": { "text": "Logo formatted title" },
+          "hint": { "text": "This is how the text should look with line breaks" },
+          "classes": "govuk-input--width-10"
+        }) }}
+
+        {{ govukSelect ({
+          "label": { "text": "Crest type" },
+          "id": "org-logo-crest-select",
+          "name": "org-logo-crest",
+          "items": [
+            {"value": "", "text": "Department for Business, Industry and Skills"},
+            {"value": "", "text": "Department for International Trade"},
+            {"value": "", "text": "Executive Office"},
+            {"value": "", "text": "HM Coastguard"},
+            {"value": "", "text": "HM Revenue & Customs"},
+            {"value": "", "text": "Home Office"},
+            {"value": "", "text": "Ministry of Defence"},
+            {"value": "", "text": "Portcullis"},
+            {"value": "", "text": "Scotland Office"},
+            {"value": "", "text": "UK Atomic Energy Authority"},
+            {"value": "", "text": "UK Hydrographic Office"},
+            {"value": "", "text": "Wales Office"}
+          ]
+        }) }}
+
+        {{ govukFileUpload({
+          id: 'org-logo-upload-input',
+          name: 'org-logo-upload',
+          label: {
+            text: 'Upload a logo'
+          }
+        }) }}
+
+        <h2 class="govuk-heading-m">Preview</h2>
+
+        {{ govukButton ({
+          "text": "Save and continue"
+        })}}
+      </div>
+    </div>
+
+  </form>
+</main>
+{% endblock %}
