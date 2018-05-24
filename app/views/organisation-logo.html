@@ -8,7 +8,7 @@
     "href": "/create-organisation"
   }) }}
 
-  <form action="/organisation-logo" method="post" class="form">
+  <form action="/confirm-publish" method="post" class="form">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
@@ -19,25 +19,39 @@
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        {{ govukRadios ({
-          "idPrefix": "org-crest-type",
-          "name": "org-crest-type",
-          "fieldset": {
-            "legend": {
-              "text": "Logo type",
-              "isPageHeading": false
-            }
-          },
-          "items": [
-            { "value": "", "text": "No identity" },
-            { "value": "", "text": "Single identity" },
-            { "value": "", "text": "Departmental crest" },
-            { "value": "", "text": "Custom logo" }
-          ]
-        })}}
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <h1 class="govuk-fieldset__heading">
+                Logo type
+              </h1>
+            </legend>
+            <div class="govuk-radios" data-module="radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="org-crest-type-1" name="org-crest-type" type="radio" value="no-identity">
+                <label class="govuk-label govuk-radios__label" for="org-crest-type-1">
+                  No identity
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="org-crest-type-2" name="org-crest-type" type="radio" value="single-identity" data-aria-controls="single-identity-fields">
+                <label class="govuk-label govuk-radios__label" for="org-crest-type-2">
+                  Single identity
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="org-crest-type-3" name="org-crest-type" type="radio" value="custom-logo" data-aria-controls="custom-logo-fields">
+                <label class="govuk-label govuk-radios__label" for="org-crest-type-3">
+                  Custom logo
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
 
         {{ govukSelect ({
-          "label": { "text": "Brand colour" },
+          "label": { "text": "Brand colour", "classes": "govuk-label--m" },
           "id": "org-logo-brand-select",
           "name": "org-logo-brand",
           "items": [
@@ -73,41 +87,44 @@
           ]
         }) }}
 
-        {{ govukTextarea ({
-          "id": "org-logo-formatted-title-textarea",
-          "name": "org-logo-formatted-title",
-          "label": { "text": "Logo formatted title" },
-          "hint": { "text": "This is how the text should look with line breaks" },
-          "classes": "govuk-input--width-10"
-        }) }}
+        <div class="govuk-radios__conditional" id="single-identity-fields">
+          {{ govukTextarea ({
+            "id": "org-logo-formatted-title-textarea",
+            "name": "org-logo-formatted-title",
+            "label": { "text": "Logo formatted title", "classes": "govuk-label--m" },
+            "hint": { "text": "This is how the text should look with line breaks" },
+            "classes": "govuk-input--width-10"
+          }) }}
 
-        {{ govukSelect ({
-          "label": { "text": "Crest type" },
-          "id": "org-logo-crest-select",
-          "name": "org-logo-crest",
-          "items": [
-            {"value": "", "text": "Department for Business, Industry and Skills"},
-            {"value": "", "text": "Department for International Trade"},
-            {"value": "", "text": "Executive Office"},
-            {"value": "", "text": "HM Coastguard"},
-            {"value": "", "text": "HM Revenue & Customs"},
-            {"value": "", "text": "Home Office"},
-            {"value": "", "text": "Ministry of Defence"},
-            {"value": "", "text": "Portcullis"},
-            {"value": "", "text": "Scotland Office"},
-            {"value": "", "text": "UK Atomic Energy Authority"},
-            {"value": "", "text": "UK Hydrographic Office"},
-            {"value": "", "text": "Wales Office"}
-          ]
-        }) }}
+          {{ govukSelect ({
+            "label": { "text": "Crest type", "classes": "govuk-label--m" },
+            "id": "org-logo-crest-select",
+            "name": "org-logo-crest",
+            "items": [
+              {"value": "", "text": "No crest"},
+              {"value": "", "text": "Department for Business, Industry and Skills"},
+              {"value": "", "text": "Department for International Trade"},
+              {"value": "", "text": "Executive Office"},
+              {"value": "", "text": "HM Coastguard"},
+              {"value": "", "text": "HM Revenue & Customs"},
+              {"value": "", "text": "Home Office"},
+              {"value": "", "text": "Ministry of Defence"},
+              {"value": "", "text": "Portcullis"},
+              {"value": "", "text": "Scotland Office"},
+              {"value": "", "text": "UK Atomic Energy Authority"},
+              {"value": "", "text": "UK Hydrographic Office"},
+              {"value": "", "text": "Wales Office"}
+            ]
+          }) }}
+        </div>
 
-        {{ govukFileUpload({
-          id: 'org-logo-upload-input',
-          name: 'org-logo-upload',
-          label: {
-            text: 'Upload a logo'
-          }
-        }) }}
+        <div class="govuk-radios__conditional" id="custom-logo-fields">
+          {{ govukFileUpload({
+            id: 'org-logo-upload-input',
+            name: 'org-logo-upload',
+            label: { "text": "Upload a logo", "classes": "govuk-label--m" }
+          }) }}
+        </div>
 
         <h2 class="govuk-heading-m">Preview</h2>
 
