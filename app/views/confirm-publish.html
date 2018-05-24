@@ -1,0 +1,191 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Check your answers
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-width-container">
+
+  <a class="govuk-back-link" href="/organisation-logo">Back</a>
+
+  <main role="main" class="govuk-main-wrapper">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">
+          Confirm you want to publish this organisation
+        </h1>
+
+        <!-- only add a heading for a list if there is more than one list -->
+        <h2 class="govuk-heading-m">
+          Organisation details
+        </h2>
+
+        <!-- use additional modifier class to change column widths for multiple groups of questions and answers: -->
+        <!--   * `govuk-check-your-answers--short` for short questions -->
+        <!--   * `govuk-check-your-answers__questions-long` for long questions -->
+        <!--   * none for single group of q&a -->
+        <dl class="govuk-check-your-answers govuk-check-your-answers--short">
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Title
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_title'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> title</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Acronym
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_acronym'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> acronym</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Organisation type
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_type'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> organisation type</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Status on GOV.UK
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_status'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> status</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Sponsoring organisations
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['sponsoring_organisations'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> sponsoring organisations</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+
+        <h2 class="govuk-heading-m">
+          Organisation logo
+        </h2>
+
+        <dl class="govuk-check-your-answers govuk-check-your-answers--short">
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Logo type
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_crest_type'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> logo type</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Brand colour
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_logo_brand'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> brand colour</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Formatted title
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_logo_formatted_title'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> formatted title</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Crest type
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_logo_crest'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> crest type</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Logo preview
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+            </dd>
+          </div>
+        </dl>
+
+
+        <h2 class="govuk-heading-m">Publish as draft</h2>
+
+        <p>
+          By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.
+        </p>
+
+        <a href="confirmation-page" class="govuk-button">Publish as draft</a>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

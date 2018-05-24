@@ -15,22 +15,22 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {{ govukInput ({
-          "label": { "text": "Title" },
+          "label": { "text": "Title", "classes": "govuk-label--m" },
           "id": "org-title-input",
-          "name": "org-title"
+          "name": "org_title"
         }) }}
 
         {{ govukInput ({
-          "label": { "text": "Acronym" },
+          "label": { "text": "Acronym", "classes": "govuk-label--m" },
           "id": "org-acronym-input",
-          "name": "org-acronym",
-          "classes": "govuk-input--width-10"
+          "name": "org_acronym",
+          "classes": "govuk-!-width-one-quarter"
         }) }}
 
         {{ govukSelect ({
-          "label": { "text": "Organisation type" },
+          "label": { "text": "Organisation type", "classes": "govuk-label--m"  },
           "id": "org-type-select",
-          "name": "org-type",
+          "name": "org_type",
           "items": [
             {"value": "adhoc_advisory_group", "text": "Adhoc advisory group"},
             {"value": "advisory_ndpb", "text": "Advisory non-departmental public body"},
@@ -50,7 +50,7 @@
           ]
         }) }}
 
-        {% set org_url %}
+        {% set org_url_html %}
           {{ govukInput ({
             "label": { "text": "External URL" },
             "id": "org-url-input",
@@ -58,10 +58,10 @@
           }) }}
         {% endset -%}
 
-        {% set superceding_org %}
+        {% set superceding_org_html %}
         <div class="govuk-form-group">
           <label class="govuk-label" for="superceding-organisations-select">Superceded by</label>
-          <select id="superceding-organisations-select" name="superceding-organisations" class="govuk-select">
+          <select id="superceding-organisations-select" name="superceding_organisations" class="govuk-select">
             {% include "includes/organisation-select-options.html" %}
           </select>
         </div>
@@ -69,7 +69,7 @@
 
         {{ govukRadios ({
           "id-prefix": "org-status",
-          "name": "org-status",
+          "name": "org_status",
           "fieldset": {
             "legend": {
               "text": "Status on GOV.UK",
@@ -84,7 +84,7 @@
               "value": "exempt",
               "text": "Exempt from joining",
               "conditional": {
-                "html": org_url
+                "html": org_url_html
               }
             },
             {"value": "tranistioning", "text": "Currently transitioning"},
@@ -92,15 +92,15 @@
               "value": "closed",
               "text": "Closed",
               "conditional": {
-                "html": superceding_org
+                "html": superceding_org_html
               }
             }
           ]
         }) }}
 
         <div class="govuk-form-group">
-          <label class="govuk-label" for="sponsoring-organisations-select">Sponsoring organisations</label>
-          <select id="sponsoring-organisations-select" name="sponsoring-organisations" class="govuk-select">
+          <label class="govuk-label govuk-label" for="sponsoring-organisations-select">Sponsoring organisations</label>
+          <select id="sponsoring-organisations-select" name="sponsoring_organisations" class="govuk-select">
             {% include "includes/organisation-select-options.html" %}
           </select>
         </div>
