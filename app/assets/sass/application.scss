@@ -12,6 +12,8 @@ $govuk-global-styles: true;
 @import 'patterns/check-your-answers';
 @import 'patterns/related-items';
 
+@import 'header';
+
 .code {
   color: $govuk-text-colour;
   background-color: $govuk-grey-4;

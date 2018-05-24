@@ -1,0 +1,29 @@
+#global-header {
+  border-bottom: 10px solid $govuk-focus-colour;
+}
+
+.govuk-preview {
+
+  #global-header {
+    border-bottom: none;
+  }
+
+  #proposition-menu {
+    display: none;
+  }
+}
+
+.govuk-tag {
+  background-color: $govuk-focus-colour;
+  color: $govuk-black;
+  margin-top: 6px;
+}
+
+#global-header .header-wrapper .header-global .header-logo {
+  width: auto;
+}
+
+#global-header .header-proposition {
+  float: right;
+  margin-top: 4px;
+}
