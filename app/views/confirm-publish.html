@@ -37,11 +37,6 @@
             <dd class="govuk-check-your-answers__answer">
               {{ data['org_title'] }}
             </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> title</span>
-              </a>
-            </dd>
           </div>
 
           <div class="govuk-check-your-answers__contents">
@@ -51,11 +46,6 @@
             <dd class="govuk-check-your-answers__answer">
               {{ data['org_acronym'] }}
             </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> acronym</span>
-              </a>
-            </dd>
           </div>
 
           <div class="govuk-check-your-answers__contents">
@@ -64,11 +54,6 @@
             </dt>
             <dd class="govuk-check-your-answers__answer">
               {{ org_type_formatted }}
-            </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> organisation type</span>
-              </a>
             </dd>
           </div>
 
@@ -89,11 +74,6 @@
                 Closed
               {% endif %}
             </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> status</span>
-              </a>
-            </dd>
           </div>
 
           {% if data['org_status'] == "exempt" %}
@@ -103,11 +83,6 @@
             </dt>
             <dd class="govuk-check-your-answers__answer">
               {{ data['org_url'] }}
-            </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> external URL</span>
-              </a>
             </dd>
           </div>
           {% endif %}
@@ -120,11 +95,6 @@
             <dd class="govuk-check-your-answers__answer">
               {{ data['superceding_organisations'] }}
             </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> superceding organisation</span>
-              </a>
-            </dd>
           </div>
           {% endif %}
 
@@ -134,11 +104,6 @@
             </dt>
             <dd class="govuk-check-your-answers__answer">
               {{ data['sponsoring_organisations'] }}
-            </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> sponsoring organisations</span>
-              </a>
             </dd>
           </div>
         </dl>
@@ -163,11 +128,6 @@
               {% endif %}
 
             </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> logo type</span>
-              </a>
-            </dd>
           </div>
 
           <div class="govuk-check-your-answers__contents">
@@ -176,11 +136,6 @@
             </dt>
             <dd class="govuk-check-your-answers__answer">
               {{ org_brand_formatted }}
-            </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> brand colour</span>
-              </a>
             </dd>
           </div>
 
@@ -192,11 +147,6 @@
             <dd class="govuk-check-your-answers__answer">
               {{ data['org_logo_formatted_title'] }}
             </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> formatted title</span>
-              </a>
-            </dd>
           </div>
 
           <div class="govuk-check-your-answers__contents">
@@ -205,11 +155,6 @@
             </dt>
             <dd class="govuk-check-your-answers__answer">
               {{ data['org_logo_crest'] }}
-            </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> crest type</span>
-              </a>
             </dd>
           </div>
           {% endif %}
@@ -222,11 +167,6 @@
             <dd class="govuk-check-your-answers__answer">
               {{ data['org_logo_upload'] }}
             </dd>
-            <dd class="govuk-check-your-answers__change">
-              <a href="#">
-                Change<span class="visually-hidden"> custom logo</span>
-              </a>
-            </dd>
           </div>
           {% endif %}
 
@@ -235,9 +175,6 @@
               Logo preview
             </dt>
             <dd class="govuk-check-your-answers__answer">
-
-            </dd>
-            <dd class="govuk-check-your-answers__change">
               {{ organisation_logo(data['org_logo_formatted_title'] | nl2br | safe, data['org_logo_brand'], data['org_url'], data['org_logo_crest'], false, data['org_title']) }}
             </dd>
           </div>
