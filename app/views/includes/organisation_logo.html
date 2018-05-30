@@ -1,0 +1,30 @@
+{% macro organisation_logo(name, brand, url='', crest='', image_url='', image_alt_text='') %}
+
+{% set logo_container_class = "logo-container" %}
+{% if url %}{% set logo_container_class = logo_container_class + " logo-link" %}{% endif %}
+{% if crest %}{% set logo_container_class = logo_container_class + " logo-with-crest crest-" + crest %}{% endif %}
+
+<div class="govuk-organisation-logo {{ brand }}">
+  {% if url %}
+    <a href="{{ url }}" class="{{ logo_container_class }}">
+  {% else %}
+    <div class="{{ logo_container_class }}">
+  {% endif %}
+
+  {% if image %}
+    <img
+      class="logo-image"
+      src="{{ image_url }}"
+      {% if image_alt_text %}alt="{{ image_alt_text }}"{% endif %}
+    />
+  {% else %}
+    <span>{{ name }}</span>
+  {% endif %}
+
+  {% if url %}
+    </a>
+  {% else %}
+    </div>
+  {% endif %}
+</div>
+{% endmacro %}

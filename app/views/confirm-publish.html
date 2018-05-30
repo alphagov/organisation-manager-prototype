@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from "includes/organisation_logo.html" import organisation_logo %}
 
 {% block page_title %}
   Check your answers
@@ -237,6 +238,7 @@
 
             </dd>
             <dd class="govuk-check-your-answers__change">
+              {{ organisation_logo(data['org_logo_formatted_title'] | nl2br | safe, data['org_logo_brand'], data['org_url'], data['org_logo_crest'], false, data['org_title']) }}
             </dd>
           </div>
         </dl>

@@ -1,6 +1,6 @@
 // Path to assets for use with the file-url function
 // in the govuk frontend toolkit's url-helpers partial
-$path: "/public/images/";
+$govuk-global-images: "/public/images/";
 
 // global styles for <a> and <p> tags
 $govuk-global-styles: true;
@@ -14,7 +14,10 @@ $govuk-global-styles: true;
 
 @import 'vendor/accessible-autocomplete';
 
+@import 'font-stack';
 @import 'header';
+@import 'organisation-colours';
+@import 'organisation-logo';
 
 .code {
   color: $govuk-text-colour;
