@@ -62,7 +62,7 @@
               Organisation type
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_type'] }}
+              {{ org_type_formatted }}
             </dd>
             <dd class="govuk-check-your-answers__change">
               <a href="#">
@@ -76,7 +76,17 @@
               Status on GOV.UK
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_status'] }}
+              {% if data['org_status'] == "live" %}
+                Currently live
+              {% elif data['org_status'] == "coming_soon" %}
+                Coming soon
+              {% elif data['org_status'] == "exempt" %}
+                Exempt from joining
+              {% elif data['org_status'] == "transitioning" %}
+                Currently transitioning
+              {% elif data['org_status'] == "closed" %}
+                Closed
+              {% endif %}
             </dd>
             <dd class="govuk-check-your-answers__change">
               <a href="#">
@@ -84,6 +94,38 @@
               </a>
             </dd>
           </div>
+
+          {% if data['org_status'] == "exempt" %}
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              External URL
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_url'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> external URL</span>
+              </a>
+            </dd>
+          </div>
+          {% endif %}
+
+          {% if data['org_status'] == "closed" %}
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Superceded by
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['superceding_organisations'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> superceding organisation</span>
+              </a>
+            </dd>
+          </div>
+          {% endif %}
 
           <div class="govuk-check-your-answers__contents">
             <dt class="govuk-check-your-answers__question">
@@ -111,7 +153,14 @@
               Logo type
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_crest_type'] }}
+              {% if data['org_logo_type'] == "no-identity" %}
+                No identity
+              {% elif data['org_logo_type'] == "single-identity" %}
+                Single indentity
+              {% elif data['org_logo_type'] == "custom-logo" %}
+                Custom logo
+              {% endif %}
+
             </dd>
             <dd class="govuk-check-your-answers__change">
               <a href="#">
@@ -125,7 +174,7 @@
               Brand colour
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_logo_brand'] }}
+              {{ org_brand_formatted }}
             </dd>
             <dd class="govuk-check-your-answers__change">
               <a href="#">
@@ -134,6 +183,7 @@
             </dd>
           </div>
 
+          {% if data[org_logo_type] == "single-identity" %}
           <div class="govuk-check-your-answers__contents">
             <dt class="govuk-check-your-answers__question">
               Formatted title
@@ -161,6 +211,23 @@
               </a>
             </dd>
           </div>
+          {% endif %}
+
+          {% if data[org_logo_type] == "custom-logo" %}
+          <div class="govuk-check-your-answers__contents">
+            <dt class="govuk-check-your-answers__question">
+              Custom logo
+            </dt>
+            <dd class="govuk-check-your-answers__answer">
+              {{ data['org_logo_upload'] }}
+            </dd>
+            <dd class="govuk-check-your-answers__change">
+              <a href="#">
+                Change<span class="visually-hidden"> custom logo</span>
+              </a>
+            </dd>
+          </div>
+          {% endif %}
 
           <div class="govuk-check-your-answers__contents">
             <dt class="govuk-check-your-answers__question">

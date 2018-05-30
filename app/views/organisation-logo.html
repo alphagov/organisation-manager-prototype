@@ -8,7 +8,7 @@
     "href": "/create-organisation"
   }) }}
 
-  <form action="/confirm-publish" method="post" class="form" enctype="multipart/form-data">
+  <form action="/confirm-publish" method="post" class="form">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
@@ -29,19 +29,19 @@
             </legend>
             <div class="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="org-crest-type-1" name="org-crest-type" type="radio" value="no-identity">
+                <input class="govuk-radios__input" id="org-crest-type-1" name="org_logo_type" type="radio" value="no-identity">
                 <label class="govuk-label govuk-radios__label" for="org-crest-type-1">
                   No identity
                 </label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="org-crest-type-2" name="org-crest-type" type="radio" value="single-identity" data-aria-controls="single-identity-fields">
+                <input class="govuk-radios__input" id="org-crest-type-2" name="org_logo_type" type="radio" value="single-identity" data-aria-controls="single-identity-fields">
                 <label class="govuk-label govuk-radios__label" for="org-crest-type-2">
                   Single identity
                 </label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="org-crest-type-3" name="org-crest-type" type="radio" value="custom-logo" data-aria-controls="custom-logo-fields">
+                <input class="govuk-radios__input" id="org-crest-type-3" name="org_logo_type" type="radio" value="custom-logo" data-aria-controls="custom-logo-fields">
                 <label class="govuk-label govuk-radios__label" for="org-crest-type-3">
                   Custom logo
                 </label>
@@ -49,43 +49,6 @@
             </div>
           </fieldset>
         </div>
-
-        {{ govukSelect ({
-          "label": { "text": "Brand colour", "classes": "govuk-label--m" },
-          "id": "org-logo-brand-select",
-          "name": "org_logo_brand",
-          "items": [
-            {"value": "1", "text": "Attorney General's Office"},
-            {"value": "2", "text": "Cabinet Office"},
-            {"value": "3", "text": "Department for Business, Innovation & Skills"},
-            {"value": "4", "text": "Department for Communities and Local Government"},
-            {"value": "5", "text": "Department for Culture, Media & Sport"},
-            {"value": "6", "text": "Department for Education"},
-            {"value": "7", "text": "Department for Environment, Food & Rural Affairs"},
-            {"value": "8", "text": "Department for International Development"},
-            {"value": "9", "text": "Department for Transport"},
-            {"value": "10", "text": "Department for Work & Pensions"},
-            {"value": "11", "text": "Department of Energy & Climate Change"},
-            {"value": "12", "text": "Department of Health"},
-            {"value": "13", "text": "Foreign & Commonwealth Office"},
-            {"value": "14", "text": "HM Government"},
-            {"value": "15", "text": "HM Revenue & Customs"},
-            {"value": "16", "text": "HM Treasury"},
-            {"value": "17", "text": "Home Office"},
-            {"value": "18", "text": "Ministry of Defence"},
-            {"value": "19", "text": "Ministry of Justice"},
-            {"value": "20", "text": "Northern Ireland Office"},
-            {"value": "21", "text": "Office of the Advocate General for Scotland"},
-            {"value": "22", "text": "Office of the Leader of the House of Lords"},
-            {"value": "23", "text": "Scotland Office"},
-            {"value": "24", "text": "Office of the Leader of the House of Commons"},
-            {"value": "25", "text": "UK Export Finance"},
-            {"value": "26", "text": "UK Trade & Investment"},
-            {"value": "27", "text": "Wales Office"},
-            {"value": "28", "text": "Civil Service"},
-            {"value": "29", "text": "Department for International Trade"}
-          ]
-        }) }}
 
         <div class="govuk-radios__conditional" id="single-identity-fields">
           {{ govukTextarea ({
@@ -101,19 +64,19 @@
             "id": "org-logo-crest-select",
             "name": "org_logo_crest",
             "items": [
-              {"value": "", "text": "No crest"},
-              {"value": "", "text": "Department for Business, Industry and Skills"},
-              {"value": "", "text": "Department for International Trade"},
-              {"value": "", "text": "Executive Office"},
-              {"value": "", "text": "HM Coastguard"},
-              {"value": "", "text": "HM Revenue & Customs"},
-              {"value": "", "text": "Home Office"},
-              {"value": "", "text": "Ministry of Defence"},
-              {"value": "", "text": "Portcullis"},
-              {"value": "", "text": "Scotland Office"},
-              {"value": "", "text": "UK Atomic Energy Authority"},
-              {"value": "", "text": "UK Hydrographic Office"},
-              {"value": "", "text": "Wales Office"}
+              {"value": "no-crest", "text": "No crest"},
+              {"value": "bis", "text": "Department for Business, Industry and Skills"},
+              {"value": "dit", "text": "Department for International Trade"},
+              {"value": "eo", "text": "Executive Office"},
+              {"value": "hmc", "text": "HM Coastguard"},
+              {"value": "hmrc", "text": "HM Revenue & Customs"},
+              {"value": "ho", "text": "Home Office"},
+              {"value": "mod", "text": "Ministry of Defence"},
+              {"value": "portcullis", "text": "Portcullis"},
+              {"value": "so", "text": "Scotland Office"},
+              {"value": "ukaea", "text": "UK Atomic Energy Authority"},
+              {"value": "ukho", "text": "UK Hydrographic Office"},
+              {"value": "wo", "text": "Wales Office"}
             ]
           }) }}
         </div>
@@ -121,10 +84,17 @@
         <div class="govuk-radios__conditional" id="custom-logo-fields">
           {{ govukFileUpload({
             id: 'org_logo_upload_input',
-            name: 'org-logo-upload',
+            name: 'org_logo_upload',
             label: { "text": "Upload a logo", "classes": "govuk-label--m" }
           }) }}
         </div>
+
+        {{ govukSelect ({
+          "label": { "text": "Brand colour", "classes": "govuk-label--m" },
+          "id": "org-logo-brand-select",
+          "name": "org_logo_brand",
+          "items": org_brand_colours
+        }) }}
 
         <h2 class="govuk-heading-m">Preview</h2>
 

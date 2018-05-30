@@ -31,30 +31,14 @@
           "label": { "text": "Organisation type", "classes": "govuk-label--m"  },
           "id": "org-type-select",
           "name": "org_type",
-          "items": [
-            {"value": "adhoc_advisory_group", "text": "Adhoc advisory group"},
-            {"value": "advisory_ndpb", "text": "Advisory non-departmental public body"},
-            {"value": "civil_service", "text": "Civil service"},
-            {"value": "court", "text": "Court"},
-            {"value": "devolved_administration", "text": "Devolved administration"},
-            {"value": "executive_agency", "text": "Executive agency"},
-            {"value": "executive_ndpb", "text": "Executive non-departmental public body"},
-            {"value": "executive_office", "text": "Executive office"},
-            {"value": "independent_monitoring_body", "text": "Independent monitoring body"},
-            {"value": "ministerial_department", "text": "Ministerial department"},
-            {"value": "non_ministerial_department", "text": "Non-ministerial department"},
-            {"value": "other", "text": "Other"},
-            {"value": "public_corporation", "text": "Public corporation"},
-            {"value": "sub_organisation", "text": "Sub-organisation"},
-            {"value": "tribunal_ndpb", "text": "Tribunal non-departmental public body"}
-          ]
+          "items": org_types
         }) }}
 
         {% set org_url_html %}
           {{ govukInput ({
             "label": { "text": "External URL" },
             "id": "org-url-input",
-            "name": "org-url"
+            "name": "org_url"
           }) }}
         {% endset -%}
 
@@ -87,7 +71,7 @@
                 "html": org_url_html
               }
             },
-            {"value": "tranistioning", "text": "Currently transitioning"},
+            {"value": "transitioning", "text": "Currently transitioning"},
             {
               "value": "closed",
               "text": "Closed",

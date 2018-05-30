@@ -1,0 +1,17 @@
+[
+  { "value": "executive_office", "text": "Executive office" },
+  { "value": "ministerial_department", "text": "Ministerial department" },
+  { "value": "non_ministerial_department", "text": "Non-ministerial department" },
+  { "value": "executive_agency", "text": "Executive agency" },
+  { "value": "executive_ndpb", "text": "Executive non-departmental public body" },
+  { "value": "advisory_ndpb", "text": "Advisory non-departmental public body" },
+  { "value": "tribunal_ndpb", "text": "Tribunal non-departmental public body" },
+  { "value": "public_corporation", "text": "Public corporation" },
+  { "value": "independent_monitoring_body", "text": "Independent monitoring body" },
+  { "value": "adhoc_advisory_group", "text": "Ad-hoc advisory group" },
+  { "value": "devolved_administration", "text": "Devolved administration" },
+  { "value": "sub_organisation", "text": "Sub-organisation" },
+  { "value": "other", "text": "Other" },
+  { "value": "civil_service", "text": "Civil Service" },
+  { "value": "court", "text": "Court" }
+]
