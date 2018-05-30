@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  <h1 class="govuk-heading-l">
+    Dashboard
+  </h1>
+
+  <p>
+    <a href="/create-organisation" class="govuk-button">Create organisation</a>
+  </p>
+
+  {{ govukTable({
+    caption: "Organsiations",
+    firstCellIsHeader: false,
+    head: [
+      { text: "Title" },
+      { text: "Acronym" },
+      { text: "Type" },
+      { text: "Status on GOV.UK" },
+      { }
+    ],
+    rows: org_table
+  })}}
+
+</main>
+{% endblock %}

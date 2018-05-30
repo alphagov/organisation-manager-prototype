@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+var orgs = require('./data/organisations.json')
 var org_types = require('./data/organisation_types.json')
 var org_brand_colours = require('./data/organisation_brand_colours.json')
 
@@ -11,6 +12,34 @@ router.get('/', function (req, res) {
 })
 
 // Add your routes here - above the module.exports line
+router.get('/dashboard', function (req, res) {
+  var org_table = []
+
+
+  for (i in orgs.results) {
+    var org = orgs.results[i]
+
+    var org_type = ''
+    for (j in org_types) {
+      if (org.organisations[0].organisation_type == org_types[j].value) {
+        org_type = org_types[j].text
+      }
+    }
+
+    var org_row = [
+      { html: '<a href="/overview/'+org.slug+'">'+org.title+'</a>'},
+      { text: org.organisations[0].acronym },
+      { text: org_type },
+      { text: org.organisations[0].organisation_state.replace(/^\w/, c => c.toUpperCase()) },
+      { html: '<a href="/edit/'+org.slug+'">Edit</a>'}
+    ]
+
+    org_table.push(org_row)
+  }
+
+  res.render('dashboard', { org_table: org_table })
+})
+
 router.get('/create-organisation', function (req, res) {
   res.render('create-organisation', { org_types: org_types })
 })
