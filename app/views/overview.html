@@ -1,40 +1,41 @@
 {% extends "layout.html" %}
+{% block page_title %}Dashboard{% endblock %}
 
-{% block page_title %}
-  Check your answers
-{% endblock %}
+{% from "includes/empty_field.html" import empty_field %}
 
 {% block content %}
+<main role="main" class="govuk-main-wrapper">
+  <h1 class="govuk-heading-l">
+    Overview
+  </h1>
 
-<div class="govuk-width-container">
+  <ul class="tabs">
+    <li class="active">
+      <a href="{{ urlPrefix }}/edit">Edit details</a>
+    </li>
+    <li>
+      <a href="{{ urlPrefix }}/publishers">Publisher access</a>
+    </li>
+  </ul>
 
-  <a class="govuk-back-link" href="/organisation-logo">Back</a>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-check-your-answers__section">
 
-  <main role="main" class="govuk-main-wrapper">
+        <div class="govuk-check-your-answers__section-heading">
+          <h2 class="govuk-heading-m">
+            Organisation details
+          </h2>
+          <span class="govuk-check-your-answers__change"><a href="/edit">Change</a></span>
+        </div>
 
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-
-        <h1 class="govuk-heading-l">
-          Confirm you want to publish this organisation
-        </h1>
-
-        <!-- only add a heading for a list if there is more than one list -->
-        <h2 class="govuk-heading-m">
-          Organisation details
-        </h2>
-
-        <!-- use additional modifier class to change column widths for multiple groups of questions and answers: -->
-        <!--   * `govuk-check-your-answers--short` for short questions -->
-        <!--   * `govuk-check-your-answers__questions-long` for long questions -->
-        <!--   * none for single group of q&a -->
         <dl class="govuk-check-your-answers govuk-check-your-answers--short">
           <div class="govuk-check-your-answers__contents">
             <dt class="govuk-check-your-answers__question">
               Title
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_title'] }}
+              {{ empty_field(data['org_title']) }}
             </dd>
           </div>
 
@@ -43,7 +44,7 @@
               Acronym
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_acronym'] }}
+              {{ empty_field(data['org_acronym']) }}
             </dd>
           </div>
 
@@ -52,7 +53,7 @@
               Organisation type
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ org_type_formatted }}
+              {{ empty_field(org_type_formatted) }}
             </dd>
           </div>
 
@@ -81,7 +82,7 @@
               External URL
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_url'] }}
+              {{ empty_field(data['org_url']) }}
             </dd>
           </div>
           {% endif %}
@@ -92,7 +93,7 @@
               Superceded by
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['superceding_organisations'] }}
+              {{ empty_field(data['superceding_organisations']) }}
             </dd>
           </div>
           {% endif %}
@@ -102,15 +103,19 @@
               Sponsoring organisations
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['sponsoring_organisations'] }}
+              {{ empty_field(data['sponsoring_organisations']) }}
             </dd>
           </div>
         </dl>
+      </div>
 
-
-        <h2 class="govuk-heading-m">
-          Organisation logo
-        </h2>
+      <div class="govuk-check-your-answers__section">
+        <div class="govuk-check-your-answers__section-heading">
+          <h2 class="govuk-heading-m">
+            Organisation logo
+          </h2>
+          <span class="govuk-check-your-answers__change"><a href="/edit">Change</a></span>
+        </div>
 
         <dl class="govuk-check-your-answers govuk-check-your-answers--short">
           <div class="govuk-check-your-answers__contents">
@@ -134,7 +139,7 @@
               Brand colour
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ org_brand_formatted }}
+              {{ empty_field(org_brand_formatted) }}
             </dd>
           </div>
 
@@ -144,7 +149,7 @@
               Formatted title
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_logo_formatted_title'] }}
+              {{ empty_field(data['org_logo_formatted_title']) }}
             </dd>
           </div>
 
@@ -153,7 +158,7 @@
               Crest type
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_logo_crest'] }}
+              {{ empty_field(data['org_logo_crest']) }}
             </dd>
           </div>
           {% endif %}
@@ -164,7 +169,7 @@
               Custom logo
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ data['org_logo_upload'] }}
+              {{ empty_field(data['org_logo_upload']) }}
             </dd>
           </div>
           {% endif %}
@@ -186,23 +191,28 @@
                 {% set org_brand = data['org_logo_brand'] %}
               {% endif %}
 
-              {{ organisation_logo(org_formatted_title | nl2br | safe, org_brand, data['org_url'], data['org_logo_crest'], false, data['org_title']) }}
+              {{ organisation_logo(org_formatted_title | nl2br | safe, org_brand, data['org_url'], data['org_logo_crest'], false, data['org_title'], large) }}
             </dd>
           </div>
         </dl>
+      </div>
 
-
-        <h2 class="govuk-heading-m">Publish as draft</h2>
-
+      <div class="actions">
         <p>
-          By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.
+          {{ govukButton({
+            text: "Edit details",
+            href: "/edit" })}}
         </p>
 
-        <a href="confirmation-page" class="govuk-button">Publish as draft</a>
+        <p>
+          {{ govukButton({
+            text: "Change status",
+            href: "/change-status" })
+          }}
+        </p>
 
       </div>
     </div>
-  </main>
-</div>
-
+  </div>
+</main>
 {% endblock %}

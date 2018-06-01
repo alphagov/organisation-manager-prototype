@@ -1,0 +1,7 @@
+{% macro empty_field(field) %}
+  {% if field == "" %}
+    <span class="empty-field">This field is empty</span>
+  {% else %}
+    {{ field }}
+  {% endif %}
+{% endmacro %}
