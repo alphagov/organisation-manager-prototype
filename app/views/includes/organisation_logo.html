@@ -2,7 +2,7 @@
 
 {% set logo_container_class = "logo-container" %}
 {% if url %}{% set logo_container_class = logo_container_class + " logo-link" %}{% endif %}
-{% if crest %}{% set logo_container_class = logo_container_class + " logo-with-crest crest-" + crest %}{% endif %}
+{% if crest == "" or crest != "no-crest" %}{% set logo_container_class = logo_container_class + " logo-with-crest crest-" + crest %}{% endif %}
 
 <div class="govuk-organisation-logo {{ brand }}">
   {% if url %}

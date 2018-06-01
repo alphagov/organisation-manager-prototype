@@ -175,7 +175,19 @@
               Logo preview
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ organisation_logo(data['org_logo_formatted_title'] | nl2br | safe, data['org_logo_brand'], data['org_url'], data['org_logo_crest'], false, data['org_title']) }}
+              {% if data['org_logo_formatted_title'] == '' %}
+                {% set org_formatted_title = data['org_title'] %}
+              {% else %}
+                {% set org_formatted_title = data['org_logo_formatted_title'] %}
+              {% endif %}
+
+              {% if data['org_logo_type'] == "no-identity" %}
+                {% set org_brand = "no-identity" %}
+              {% else %}
+                {% set org_brand = data['org_logo_brand'] %}
+              {% endif %}
+
+              {{ organisation_logo(org_formatted_title | nl2br | safe, org_brand, data['org_url'], data['org_logo_crest'], false, data['org_title']) }}
             </dd>
           </div>
         </dl>
