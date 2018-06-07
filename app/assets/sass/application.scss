@@ -120,6 +120,29 @@ $govuk-global-styles: true;
   }
 }
 
+.govuk-button--secondary {
+  background-color: $govuk-blue;
+  box-shadow: 0 2px 0 darken($govuk-blue, 10%);
+
+  &:hover,
+  &:focus {
+    background-color: lighten($govuk-blue, 10%);
+  }
+
+  &:active {
+    top: 2px;
+    box-shadow: none;
+
+    @include govuk-if-ie8 {
+      border-bottom-width: 0;
+    }
+  }
+}
+
 .empty-field {
   color: $govuk-secondary-text-colour;
+}
+
+.js-remove-org {
+  margin-left: 5px;
 }

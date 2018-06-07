@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+{% block page_title %}Replace organisation{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  <a class="govuk-back-link" href="/change-status">Back</a>
+
+  <form action="/confirm-replace" method="post" class="form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+          Replace organisation
+        </h1>
+
+        <p>
+          Select one or more organisations to replace [current org] with
+        </p>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--m" for="replacement-organisations-select">Replacement organisations</label>
+          <select id="replacement-organisations-select" name="replacement_organisations" class="govuk-select">
+            {% include "includes/organisation-select-options.html" %}
+          </select>
+        </div>
+
+        <div class="govuk-form-group">
+          <button type="submit" class="govuk-button govuk-button--secondary" id="js-choose-org-button">
+            Choose organisation
+          </button>
+        </div>
+
+        <div class="govuk-form-group js-hidden" id="selected-orgs-group">
+          <h2 class="govuk-heading-m">
+            Selected organisations
+          </h2>
+          <ul class="govuk-list" id="selected-organisations">
+
+          </ul>
+        </div>
+
+        <div class="js-hidden" id="selected-organisations-data"></div>
+
+        {{ govukButton ({
+          "text": "Save and continue"
+        })}}
+      </div>
+    </div>
+
+  </form>
+</main>
+
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+  var organisationsAutocomplete = govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('replacement-organisations-select'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+
+  $('#js-choose-org-button').on('click', function(e) {
+    e.preventDefault()
+
+    var $orgSelect = $('#replacement-organisations-select')
+    var $selectedOrgsList = $('#selected-organisations')
+    var $selectedOrgsData = $('#selected-organisations-data')
+    var selectedOrgsCount = $selectedOrgsList.children('li').length
+    var selected = $orgSelect.val()
+    var duplicate = false;
+
+    if (!selected.trim()) {
+      return false
+    }
+
+    $selectedOrgsList.children('li').each(function(i) {
+      if ($(this).data('value') == selected) {
+        duplicate = true
+      }
+    })
+
+    if (!duplicate) {
+      $selectedOrgsList.append('<li id="selected-org-'+(selectedOrgsCount+1)+'" data-value="'+selected+'">'+selected+'<a href="#" class="js-remove-org">&times;<span class="govuk-visually-hidden">Remove organisation</a></li>')
+      $('#selected-orgs-group').removeClass('js-hidden')
+
+      $selectedOrgsData.append('<input name="replacement_organisations_data" value="'+selected+'" type="hidden">')
+    }
+  })
+
+  $('#selected-organisations').on('click', 'a', function(e) {
+    e.preventDefault()
+
+    var $this = $(this)
+    var value = $this.data('value')
+    var $parent = $(this).parent()
+
+    $('#selected-organisations-data').children('input').each(function(i) {
+      var $this = $(this)
+      if ($this.value == value) {
+        $this.remove()
+      }
+    })
+
+    $parent.remove()
+  })
+</script>
+{% endblock %}

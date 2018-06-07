@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block page_title %}Close organisation{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  <a class="govuk-back-link" href="/change-status">Back</a>
+
+  <form action="/confirm-close" method="post" class="form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+          Close organisation
+        </h1>
+
+        {{ govukDateInput({
+          id: "close_date_input",
+          name: "close_date",
+          fieldset: {
+            legend: {
+              text: "Date this organisation closed",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 2018"
+          },
+          items: [
+            { name: 'day' },
+            { name: 'month' },
+            { name: 'year' }
+          ]
+        })}}
+
+        {{ govukButton ({
+          "text": "Save and continue"
+        })}}
+      </div>
+    </div>
+
+  </form>
+</main>
+
+{% endblock %}

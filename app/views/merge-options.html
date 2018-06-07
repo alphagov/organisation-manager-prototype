@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block page_title %}Merge options{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  <a class="govuk-back-link" href="/change-status">Back</a>
+
+  <form action="/merge-options-route" method="post" class="form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                Create a new organisation?
+              </h1>
+            </legend>
+            <div class="govuk-radios govuk-radios--inline">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="merge-options-1" name="merge_options" type="radio" value="yes">
+                <label class="govuk-label govuk-radios__label" for="merge-options-1">
+                Create new organisation
+                <span id="changed-name-hint" class="govuk-hint">
+                  End [org_1], [org_2] and [current_org] and create a new organisation to supercede them
+                </span>
+              </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="merge-options-2" name="merge_options" type="radio" value="no">
+                <label class="govuk-label govuk-radios__label" for="merge-options-2">
+                Merge organisations into [current_org]
+                <span id="changed-name-hint" class="govuk-hint">
+                  End [org_1] and [org_2] and set [current_org] as the superceding organisation
+                </span>
+              </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        {{ govukButton ({
+          text: "Save and continue"
+        })}}
+
+      </div>
+    </div>
+  </form>
+</main>
+
+{% endblock %}

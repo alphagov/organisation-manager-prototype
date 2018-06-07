@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block page_title %}Confirm organisation merge{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  <a class="govuk-back-link" href="/merge-organisation">Back</a>
+
+  <form action="/confirm-replace" method="post" class="form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+          Confirm organisation merge
+        </h1>
+
+        <p>
+          You are about to merge [current org] with the following organisations
+        </p>
+
+        <h2 class="govuk-heading-m">Organisations to merge</h2>
+
+        <ul class="govuk-list">s
+          {% for org in data['replacement_organisations_data'] %}
+            <li>{{ org }}</li>
+          {% endfor %}
+        </ul>
+
+        {{ govukButton({
+          "text": "Replace organisation"
+        })}}
+      </div>
+    </div>
+
+  </form>
+</main>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block page_title %}Confirm replacement{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  <a class="govuk-back-link" href="/replace-organisation">Back</a>
+
+  <form action="/confirm-replace" method="post" class="form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+          Confirm replacement organisation
+        </h1>
+
+        <p>
+          You are about to replace [current org] with the following organisations
+        </p>
+
+        <h2 class="govuk-heading-m">Replacement organisations</h2>
+
+        <ul class="govuk-list">
+          {% for org in data['replacement_organisations_data'] %}
+            <li>{{ org }}</li>
+          {% endfor %}
+        </ul>
+
+        {{ govukButton({
+          "text": "Replace organisation"
+        })}}
+      </div>
+    </div>
+
+  </form>
+</main>
+{% endblock %}

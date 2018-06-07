@@ -27,7 +27,7 @@ router.get('/dashboard', function (req, res) {
     }
 
     var org_row = [
-      { html: '<a href="/overview/'+org.slug+'">'+org.title+'</a>'},
+      { html: '<a href="/overview#'+org.slug+'">'+org.title+'</a>'},
       { text: org.organisations[0].acronym },
       { text: org_type },
       { text: org.organisations[0].organisation_state.replace(/^\w/, c => c.toUpperCase()) },
@@ -68,6 +68,21 @@ router.get('/confirm-publish', function (req, res) {
   }
 
   res.render('confirm-publish', data)
+})
+
+// change status routes
+router.post('/change-status', function (req, res) {
+  var status = req.session.data['org_status']
+
+  res.redirect("/"+status+"-organisation")
+})
+
+router.post('/merge-options-route', function (req, res) {
+  if (req.session.data['merge_options'] == "true") {
+    res.redirect('/create-merge-organisation')
+  } else {
+    res.redirect('/confirm-merge')
+  }
 })
 
 module.exports = router
