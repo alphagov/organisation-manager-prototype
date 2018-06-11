@@ -35,7 +35,7 @@
               Title
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(data['org_title']) }}
+              {{ empty_field(org.title) }}
             </dd>
           </div>
 
@@ -44,7 +44,7 @@
               Acronym
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(data['org_acronym']) }}
+              {{ empty_field(org.acronym) }}
             </dd>
           </div>
 
@@ -53,7 +53,7 @@
               Organisation type
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(org_type_formatted) }}
+              {{ empty_field(org.formatted_organisation_type) }}
             </dd>
           </div>
 
@@ -62,15 +62,15 @@
               Status on GOV.UK
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {% if data['org_status'] == "live" %}
+              {% if org.organisation_state == "live" %}
                 Currently live
-              {% elif data['org_status'] == "coming_soon" %}
+              {% elif org.organisation_state == "coming_soon" %}
                 Coming soon
-              {% elif data['org_status'] == "exempt" %}
+              {% elif org.organisation_state == "exempt" %}
                 Exempt from joining
-              {% elif data['org_status'] == "transitioning" %}
+              {% elif org.organisation_state == "transitioning" %}
                 Currently transitioning
-              {% elif data['org_status'] == "closed" %}
+              {% elif org.organisation_state == "closed" %}
                 Closed
               {% endif %}
             </dd>
@@ -82,7 +82,7 @@
               External URL
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(data['org_url']) }}
+              {{ empty_field(org.external_url) }}
             </dd>
           </div>
           {% endif %}
@@ -93,7 +93,7 @@
               Superceded by
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(data['superceding_organisations']) }}
+              {{ empty_field(org.superceding_organisations) }}
             </dd>
           </div>
           {% endif %}
@@ -103,7 +103,7 @@
               Sponsoring organisations
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(data['sponsoring_organisations']) }}
+              {{ empty_field(org.sponsoring_organisations) }}
             </dd>
           </div>
         </dl>
@@ -123,11 +123,11 @@
               Logo type
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {% if data['org_logo_type'] == "no-identity" %}
+              {% if org.organisation_crest == "no-identity" %}
                 No identity
-              {% elif data['org_logo_type'] == "single-identity" %}
+              {% elif org.organisation_crest == "single-identity" %}
                 Single indentity
-              {% elif data['org_logo_type'] == "custom-logo" %}
+              {% elif org.organisation_crest == "custom-logo" %}
                 Custom logo
               {% endif %}
 
@@ -139,17 +139,17 @@
               Brand colour
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(org_brand_formatted) }}
+              {{ empty_field(org.organisation_brand) }}
             </dd>
           </div>
 
-          {% if data[org_logo_type] == "single-identity" %}
+          {% if org.organisation_crest != "no-identity" or org.organisation_crest != "" %}
           <div class="govuk-check-your-answers__contents">
             <dt class="govuk-check-your-answers__question">
               Formatted title
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(data['org_logo_formatted_title']) }}
+              {{ empty_field(org.logo_formatted_title) }}
             </dd>
           </div>
 
@@ -158,18 +158,18 @@
               Crest type
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(data['org_logo_crest']) }}
+              {{ empty_field(org.organisation_crest) }}
             </dd>
           </div>
           {% endif %}
 
-          {% if data[org_logo_type] == "custom-logo" %}
+          {% if org.organisation_crest == "custom" %}
           <div class="govuk-check-your-answers__contents">
             <dt class="govuk-check-your-answers__question">
               Custom logo
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(data['org_logo_upload']) }}
+              {{ empty_field(org.logo_url) }}
             </dd>
           </div>
           {% endif %}
@@ -179,40 +179,42 @@
               Logo preview
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {% if data['org_logo_formatted_title'] == '' %}
+              {% if org.logo_formatted_title == '' %}
                 {% set org_formatted_title = data['org_title'] %}
               {% else %}
-                {% set org_formatted_title = data['org_logo_formatted_title'] %}
+                {% set org_formatted_title = org.logo_formatted_title %}
               {% endif %}
 
-              {% if data['org_logo_type'] == "no-identity" %}
+              {% if org.organisation_crest == "no-identity" %}
                 {% set org_brand = "no-identity" %}
               {% else %}
-                {% set org_brand = data['org_logo_brand'] %}
+                {% set org_brand = org.organisation_brand %}
               {% endif %}
 
-              {{ organisation_logo(org_formatted_title | nl2br | safe, org_brand, data['org_url'], data['org_logo_crest'], false, data['org_title'], large) }}
+              {{ organisation_logo(org_formatted_title | nl2br | safe, org_brand, org.logo_url, org.organisation_crest, false, org.title) }}
             </dd>
           </div>
         </dl>
       </div>
+    </div>
 
-      <div class="actions">
-        <p>
-          {{ govukButton({
-            text: "Edit details",
-            href: "/edit" })}}
-        </p>
+    <div class="govuk-grid-column-one-third">
+      <div class="side-column">
+        <div class="actions">
+          <p>
+            {{ govukButton({
+              text: "Publish",
+              href: "/publish" })}}
+          </p>
 
-        <p>
-          {{ govukButton({
-            text: "Change status",
-            href: "/change-status" })
-          }}
-        </p>
-
+          <p>
+            <a href="/change-status">Change status</a>
+          </p>
+        </div>
       </div>
     </div>
+
+
   </div>
 </main>
 {% endblock %}

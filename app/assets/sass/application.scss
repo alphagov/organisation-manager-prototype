@@ -139,6 +139,26 @@ $govuk-global-styles: true;
   }
 }
 
+
+.actions {
+  a.govuk-c-button {
+    margin-bottom: 15px;
+  }
+  ul {
+    margin-bottom: 0;
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.side-column {
+  margin-top: 30px;
+  padding: 25px;
+  background: $govuk-grey-4;
+}
+
+
 .empty-field {
   color: $govuk-secondary-text-colour;
 }

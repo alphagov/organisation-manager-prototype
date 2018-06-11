@@ -40,6 +40,30 @@ router.get('/dashboard', function (req, res) {
   res.render('dashboard', { org_table: org_table })
 })
 
+router.get('/overview/:org_slug', function (req, res) {
+  var this_org = {}
+  // look up org
+  for (i in orgs) {
+    var org = orgs[i]
+    if (req.params.org_slug == org.slug) {
+      this_org = org
+    }
+  }
+
+  for (i in org_types) {
+    var type = org_types[i]
+    if (org.organisation_type.trim() == type.value.trim()) {
+      this_org.formatted_organisation_type = type.text
+    }
+  }
+
+  if (this_org == {}) {
+    res.send("oops")
+  } else {
+    res.render('overview', { org: this_org })
+  }
+})
+
 router.get('/create-organisation', function (req, res) {
   res.render('create-organisation', { org_types: org_types })
 })
