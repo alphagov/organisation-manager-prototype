@@ -1,10 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
-var orgs = require('./data/organisations.json')
+var orgs_import = require('./data/organisations.json')
 var org_types = require('./data/organisation_types.json')
 var org_brand_colours = require('./data/organisation_brand_colours.json')
 
+var orgs = []
+// parse orgs
+for (i in orgs_import.results) {
+  var imported = orgs_import.results[i].organisations[0]
+  orgs.push(imported)
+}
 
 // Route index page
 router.get('/', function (req, res) {
@@ -16,21 +22,21 @@ router.get('/dashboard', function (req, res) {
   var org_table = []
 
 
-  for (i in orgs.results) {
-    var org = orgs.results[i]
+  for (i in orgs) {
+    var org = orgs[i]
 
     var org_type = ''
     for (j in org_types) {
-      if (org.organisations[0].organisation_type == org_types[j].value) {
+      if (org.organisation_type == org_types[j].value) {
         org_type = org_types[j].text
       }
     }
 
     var org_row = [
-      { html: '<a href="/overview#'+org.slug+'">'+org.title+'</a>'},
-      { text: org.organisations[0].acronym },
+      { html: '<a href="/overview/'+org.slug+'">'+org.title+'</a>'},
+      { text: org.acronym },
       { text: org_type },
-      { text: org.organisations[0].organisation_state.replace(/^\w/, c => c.toUpperCase()) },
+      { text: org.organisation_state.replace(/^\w/, c => c.toUpperCase()) },
       { html: '<a href="/edit/'+org.slug+'">Edit</a>'}
     ]
 
