@@ -1,6 +1,6 @@
 [
-  {"value": "no-crest", "text": "No crest"},
   {"value": "single-identity", "text": "Single identity"},
+  {"value": "no-crest", "text": "No crest"},
   {"value": "bis", "text": "Department for Business, Industry and Skills"},
   {"value": "dit", "text": "Department for International Trade"},
   {"value": "eo", "text": "Executive Office"},
