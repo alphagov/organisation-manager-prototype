@@ -9,6 +9,17 @@
     Overview
   </h1>
 
+  <dl class="metadata govuk-!-mb-r6">
+    <dt>Created by</dt>
+    <dd>Kamala Khan</dd>
+    <dt>Last updated</dt>
+    <dd>20 February 2018</dd>
+    <dt>Status</dt>
+    <dd>
+      {% if org.status == "" or org.status == null %}Published{% else %}{{ org.status }}{% endif %}
+    </dd>
+  </dl>
+
   <ul class="tabs">
     <li class="active">
       <a href="{{ urlPrefix }}/edit">Edit details</a>

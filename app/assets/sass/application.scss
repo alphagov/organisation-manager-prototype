@@ -158,6 +158,21 @@ $govuk-global-styles: true;
   background: $govuk-grey-4;
 }
 
+.metadata {
+  & dt, & dd {
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  dt {
+    width: 20%;
+  }
+
+  dd {
+    width: 79%;
+    margin-left: 0;
+  }
+}
 
 .empty-field {
   color: $govuk-secondary-text-colour;
