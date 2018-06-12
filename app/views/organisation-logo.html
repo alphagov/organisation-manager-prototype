@@ -111,8 +111,6 @@
           "items": org_brand_colours
         }) }}
 
-        <h2 class="govuk-heading-m">Preview</h2>
-
         {{ govukButton ({
           "text": "Save and continue"
         })}}
@@ -121,4 +119,15 @@
 
   </form>
 </main>
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('org-logo-brand-select'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+</script>
 {% endblock %}
