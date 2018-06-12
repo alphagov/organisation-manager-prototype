@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block page_title %}Create organisation{% endblock %}
+
+{% block content %}
+<main role="main" class="govuk-main-wrapper">
+  {{ govukBackLink({
+    "text": "Back",
+    "href": "/create-organisation"
+  }) }}
+
+  <form action="/organisation-logo" method="post" class="form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+          Create organisation
+        </h1>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukInput ({
+          "label": { "text": "Title", "classes": "govuk-label--m" },
+          "id": "org-title-input",
+          "name": "org_title"
+        }) }}
+
+        {{ govukInput ({
+          "label": { "text": "Acronym", "classes": "govuk-label--m" },
+          "id": "org-acronym-input",
+          "name": "org_acronym",
+          "classes": "govuk-!-width-one-quarter"
+        }) }}
+
+        {% set org_url_html %}
+          {{ govukInput ({
+            "label": { "text": "External URL" },
+            "id": "org-url-input",
+            "name": "org_url"
+          }) }}
+        {% endset -%}
+
+        {% set superceding_org_html %}
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="superceding-organisations-select">Superceded by</label>
+          <select id="superceding-organisations-select" name="superceding_organisations" class="govuk-select">
+            {% include "includes/organisation-select-options.html" %}
+          </select>
+        </div>
+        {% endset -%}
+
+        {{ govukRadios ({
+          "id-prefix": "org-status",
+          "name": "org_status",
+          "fieldset": {
+            "legend": {
+              "text": "Status on GOV.UK",
+              "isPageHeading": false,
+              "classes": 'govuk-fieldset__legend--m'
+            }
+          },
+          "items": [
+            {"value": "live", "text": "Currently live"},
+            {"value": "coming_soon", "text": "Coming soon"},
+            {
+              "value": "exempt",
+              "text": "Exempt from joining",
+              "conditional": {
+                "html": org_url_html
+              }
+            },
+            {"value": "transitioning", "text": "Currently transitioning"},
+            {
+              "value": "closed",
+              "text": "Closed",
+              "conditional": {
+                "html": superceding_org_html
+              }
+            }
+          ]
+        }) }}
+
+        {% if data['organisation_type'] != "executive_office"
+          and data['organisation_type'] != "ministerial_department"
+          and data['organisation_type'] != "non_ministerial_department"
+          and data['organisation_type'] != "executive_agency"
+        %}
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--m" for="sponsoring-organisations-select">Sponsoring organisations</label>
+          <select id="sponsoring-organisations-select" name="sponsoring_organisations" class="govuk-select">
+            {% include "includes/organisation-select-options.html" %}
+          </select>
+        </div>
+        {% endif %}
+
+        {{ govukButton ({
+          "text": "Save and continue"
+        })}}
+      </div>
+    </div>
+
+  </form>
+</main>
+
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('sponsoring-organisations-select'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+
+  govukGovernmentOrganisationsAutocomplete({
+    selectElement: document.getElementById('superceding-organisations-select'),
+    showAllValues: false,
+    minLength: 2,
+    defaultValue: ''
+  })
+</script>
+{% endblock %}

@@ -55,6 +55,24 @@ router.get('/dashboard', function (req, res) {
   res.render('dashboard', { org_table: org_table })
 })
 
+router.post('/overview', function (req, res) {
+  var org = {
+    organisation_brand:   req.session.data['org_logo_brand'],
+    logo_formatted_title: req.session.data['org_logo_formatted_title'],
+    organisation_crest:   req.session.data['org_logo_crest'],
+    title:                req.session.data['org_title'],
+    acronym:              req.session.data['org_acronym'],
+    link:                 req.session.data['org_url'],
+    slug:                 req.session.data['org_title'].toLowerCase().replace(/\s+/, '-'),
+    organisation_type:    req.session.data['organisation_type'],
+    organisation_state:   req.session.data['org_status']
+  }
+
+  orgs.unshift(org)
+
+  res.redirect('/overview/'+org.slug)
+})
+
 router.get('/overview/:org_slug', function (req, res) {
   var this_org = {}
   // look up org

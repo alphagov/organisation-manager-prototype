@@ -1,18 +1,18 @@
 {% extends "layout.html" %}
-{% block page_title %}Edit logo{% endblock %}
+{% block page_title %}Organisation logo{% endblock %}
 
 {% block content %}
 <main role="main" class="govuk-main-wrapper">
   {{ govukBackLink({
     "text": "Back",
-    "href": "/create-organisation"
+    "href": "/organisation-details"
   }) }}
 
-  <form action="/confirm-publish" method="post" class="form">
+  <form action="/overview" method="post" class="form">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
-          Edit logo
+          Organisation logo
         </h1>
       </div>
     </div>
