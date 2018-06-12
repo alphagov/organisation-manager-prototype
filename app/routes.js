@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-var orgs_import = require('./data/organisations.json')
-var org_types = require('./data/organisation_types.json')
+var orgs_import       = require('./data/organisations.json')
+var org_types         = require('./data/organisation_types.json')
 var org_brand_colours = require('./data/organisation_brand_colours.json')
+var org_crests        = require('./data/organisation_crests.json')
 
 var orgs = []
 // parse orgs
@@ -75,7 +76,7 @@ router.get('/create-organisation', function (req, res) {
 })
 
 router.get('/organisation-logo', function (req, res) {
-  res.render('organisation-logo', { org_brand_colours: org_brand_colours })
+  res.render('organisation-logo', { org_brand_colours: org_brand_colours, org_crests: org_crests })
 })
 
 router.get('/confirm-publish', function (req, res) {
