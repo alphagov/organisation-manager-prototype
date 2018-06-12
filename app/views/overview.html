@@ -150,7 +150,7 @@
               Brand colour
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(org.organisation_brand) }}
+              {{ empty_field(org.formatted_brand_colour) }}
             </dd>
           </div>
 
@@ -160,7 +160,7 @@
               Formatted title
             </dt>
             <dd class="govuk-check-your-answers__answer">
-              {{ empty_field(org.logo_formatted_title) }}
+              {{ empty_field(org.logo_formatted_title | nl2br | safe) }}
             </dd>
           </div>
 

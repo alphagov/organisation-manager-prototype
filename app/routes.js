@@ -13,6 +13,19 @@ for (i in orgs_import.results) {
   orgs.push(imported)
 }
 
+var inArray = function(needle, haystack) {
+  var result = ""
+
+  for (var i in haystack) {
+    var straw = haystack[i]
+    if (needle == straw.value) {
+      result = straw.text
+    }
+  }
+
+  return result
+}
+
 // Route index page
 router.get('/', function (req, res) {
   res.render('index')
@@ -26,12 +39,7 @@ router.get('/dashboard', function (req, res) {
   for (i in orgs) {
     var org = orgs[i]
 
-    var org_type = ''
-    for (j in org_types) {
-      if (org.organisation_type == org_types[j].value) {
-        org_type = org_types[j].text
-      }
-    }
+    var org_type = inArray(org.organisation_type, org_types)
 
     var org_row = [
       { html: '<a href="/overview/'+org.slug+'">'+org.title+'</a>'},
@@ -57,12 +65,9 @@ router.get('/overview/:org_slug', function (req, res) {
     }
   }
 
-  for (i in org_types) {
-    var type = org_types[i]
-    if (org.organisation_type.trim() == type.value.trim()) {
-      this_org.formatted_organisation_type = type.text
-    }
-  }
+  this_org.formatted_organisation_type = inArray(this_org.organisation_type, org_types)
+  this_org.formatted_crest = inArray(this_org.organisation_crest, org_crests)
+  this_org.formatted_brand_colour = inArray(this_org.organisation_brand, org_brand_colours)
 
   if (this_org == {}) {
     res.send("oops")
