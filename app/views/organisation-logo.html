@@ -20,6 +20,11 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds" data-module="radios">
 
+        {% if data['organisation_type'] != "executive_office"
+          and data['organisation_type'] != "ministerial_department"
+          and data['organisation_type'] != "non_ministerial_department"
+          and data['organisation_type'] != "executive_agency"
+        %}
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
@@ -49,7 +54,15 @@
             </div>
           </fieldset>
         </div>
+        {% else %}
+        <input type="hidden" name="org_logo_type" value="single-identity">
+        {% endif %}
 
+        {% if data['organisation_type'] != "executive_office"
+          and data['organisation_type'] != "ministerial_department"
+          and data['organisation_type'] != "non_ministerial_department"
+          and data['organisation_type'] != "executive_agency"
+        %}
         <div class="govuk-radios__conditional" id="single-identity-fields">
           {{ govukTextarea ({
             "id": "org-logo-formatted-title-textarea",
@@ -65,7 +78,7 @@
             "name": "org_logo_crest",
             "items": org_crests
           }) }}
-        </div>
+          </div>
 
         <div class="govuk-radios__conditional" id="custom-logo-fields">
           {{ govukFileUpload({
@@ -74,6 +87,22 @@
             label: { "text": "Upload a logo", "classes": "govuk-label--m" }
           }) }}
         </div>
+        {% else %}
+        {{ govukTextarea ({
+          "id": "org-logo-formatted-title-textarea",
+          "name": "org_logo_formatted_title",
+          "label": { "text": "Logo formatted title", "classes": "govuk-label--m" },
+          "hint": { "text": "This is how the text should look with line breaks" },
+          "classes": "govuk-input--width-10"
+        }) }}
+
+        {{ govukSelect ({
+          "label": { "text": "Crest type", "classes": "govuk-label--m" },
+          "id": "org-logo-crest-select",
+          "name": "org_logo_crest",
+          "items": org_crests
+        }) }}
+        {% endif %}
 
         {{ govukSelect ({
           "label": { "text": "Brand colour", "classes": "govuk-label--m" },
