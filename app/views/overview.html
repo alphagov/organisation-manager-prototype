@@ -138,10 +138,9 @@
                 No identity
               {% elif org.organisation_crest == "single-identity" %}
                 Single indentity
-              {% elif org.organisation_crest == "custom-logo" %}
+              {% elif org.organisation_crest == "custom" %}
                 Custom logo
               {% endif %}
-
             </dd>
           </div>
 
@@ -154,7 +153,7 @@
             </dd>
           </div>
 
-          {% if org.organisation_crest != "no-identity" or org.organisation_crest != "" %}
+          {% if org.organisation_crest != "no-identity" and org.organisation_crest != "custom" and org.organisation_crest != "" %}
           <div class="govuk-check-your-answers__contents">
             <dt class="govuk-check-your-answers__question">
               Formatted title
@@ -180,11 +179,14 @@
               Custom logo
             </dt>
             <dd class="govuk-check-your-answers__answer">
+              {% if org.logo_url != "" and org.logo_url != null %}
+              <img src="{{ org.logo_url }}">
+              {% else %}
               {{ empty_field(org.logo_url) }}
+              {% endif %}
             </dd>
           </div>
-          {% endif %}
-
+          {% else %}
           <div class="govuk-check-your-answers__contents">
             <dt class="govuk-check-your-answers__question">
               Logo preview
@@ -205,6 +207,7 @@
               {{ organisation_logo(org_formatted_title | nl2br | safe, org_brand, org.logo_url, org.organisation_crest, false, org.title) }}
             </dd>
           </div>
+          {% endif %}
         </dl>
       </div>
     </div>
