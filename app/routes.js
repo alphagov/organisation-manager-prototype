@@ -26,6 +26,23 @@ var inArray = function(needle, haystack) {
   return result
 }
 
+var lookupOrg = function (slug) {
+  var this_org = {}
+  // look up org
+  for (i in orgs) {
+    var org = orgs[i]
+    if (slug == org.slug) {
+      this_org = org
+    }
+  }
+
+  this_org.formatted_organisation_type = inArray(this_org.organisation_type, org_types)
+  this_org.formatted_crest = inArray(this_org.organisation_crest, org_crests)
+  this_org.formatted_brand_colour = inArray(this_org.organisation_brand, org_brand_colours)
+
+  return this_org
+}
+
 // Route index page
 router.get('/', function (req, res) {
   res.render('index')
@@ -74,18 +91,7 @@ router.post('/overview', function (req, res) {
 })
 
 router.get('/overview/:org_slug', function (req, res) {
-  var this_org = {}
-  // look up org
-  for (i in orgs) {
-    var org = orgs[i]
-    if (req.params.org_slug == org.slug) {
-      this_org = org
-    }
-  }
-
-  this_org.formatted_organisation_type = inArray(this_org.organisation_type, org_types)
-  this_org.formatted_crest = inArray(this_org.organisation_crest, org_crests)
-  this_org.formatted_brand_colour = inArray(this_org.organisation_brand, org_brand_colours)
+  var this_org = lookupOrg(req.params['org_slug'])
 
   if (this_org == {}) {
     res.send("oops")
@@ -125,10 +131,20 @@ router.get('/confirm-publish', function (req, res) {
 })
 
 // change status routes
-router.post('/change-status', function (req, res) {
+router.get('/change-status/:org_slug', function (req, res) {
+  res.render('change-status', {org_slug: req.params['org_slug']})
+})
+
+router.post('/change-status/:org_slug', function (req, res) {
   var status = req.session.data['org_status']
 
-  res.redirect("/"+status+"-organisation")
+  res.redirect("/"+status+"-organisation/"+req.params['org_slug'])
+})
+
+router.get('/replace-organisation/:org_slug', function (req, res) {
+  var org = lookupOrg(req.params['org_slug'])
+
+  res.render('replace-organisation', {org: org })
 })
 
 router.post('/merge-options-route', function (req, res) {

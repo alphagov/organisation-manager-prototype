@@ -215,15 +215,12 @@
     <div class="govuk-grid-column-one-third">
       <div class="side-column">
         <div class="actions">
-          <p>
             {{ govukButton({
               text: "Publish",
-              href: "/publish" })}}
-          </p>
-
-          <p>
-            <a href="/change-status">Change status</a>
-          </p>
+              href: "/publish" })}}<br>
+            <a href="/change-status/{{ org.slug }}">Change status</a><br>
+            <a href="/review">Review</a><br>
+            <a href="/delete">Delete</a>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 
 {% block content %}
 <main role="main" class="govuk-main-wrapper">
-  <a class="govuk-back-link" href="/replace-organisation">Back</a>
+  <a class="govuk-back-link" href="/replace-organisation/{{ org.slug }}">Back</a>
 
   <form action="/confirm-replace" method="post" class="form">
     <div class="govuk-grid-row">
@@ -13,7 +13,7 @@
         </h1>
 
         <p>
-          You are about to replace [current org] with the following organisations
+          You are about to replace {{ org.title }} with the following organisations:
         </p>
 
         <h2 class="govuk-heading-m">Replacement organisations</h2>
@@ -24,11 +24,14 @@
           {% endfor %}
         </ul>
 
+        <p>Once published this will close {{ org.title }} and will reassign the content and roles to the above organisaitons.</p>
+
         {{ govukButton({
           "text": "Replace organisation"
         })}}
       </div>
     </div>
+
 
   </form>
 </main>

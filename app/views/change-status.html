@@ -3,9 +3,9 @@
 
 {% block content %}
 <main role="main" class="govuk-main-wrapper">
-  <a class="govuk-back-link" href="/overview">Back</a>
+  <a class="govuk-back-link" href="/overview/{{ org.slug }}">Back</a>
 
-  <form action="/change-status" method="post" class="form">
+  <form action="/change-status/{{ org_slug }}" method="post" class="form">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
