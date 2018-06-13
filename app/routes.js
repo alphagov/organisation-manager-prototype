@@ -147,12 +147,36 @@ router.get('/replace-organisation/:org_slug', function (req, res) {
   res.render('replace-organisation', {org: org })
 })
 
-router.post('/merge-options-route', function (req, res) {
+router.get('/confirm-replace/:org_slug', function (req, res) {
+  var org = lookupOrg(req.params['org_slug'])
+
+  res.render('confirm-replace', {org: org })
+})
+
+router.get('/merge-organisation/:org_slug', function (req, res) {
+  var org = lookupOrg(req.params['org_slug'])
+
+  res.render('merge-organisation', {org: org })
+})
+
+router.post('/merge-options/:org_slug', function (req, res) {
+  var org = lookupOrg(req.params['org_slug'])
+
+  res.render('merge-options', { org: org })
+})
+
+router.post('/merge-options-route/:org_slug', function (req, res) {
   if (req.session.data['merge_options'] == "true") {
-    res.redirect('/create-merge-organisation')
+    res.redirect('/create-merge-organisation/'+req.params['org_slug'])
   } else {
-    res.redirect('/confirm-merge')
+    res.redirect('/confirm-merge/'+req.params['org_slug'])
   }
+})
+
+router.get('/confirm-merge/:org_slug', function (req, res) {
+  var org = lookupOrg(req.params['org_slug'])
+
+  res.render('confirm-merge', { org: org })
 })
 
 module.exports = router

@@ -3,9 +3,9 @@
 
 {% block content %}
 <main role="main" class="govuk-main-wrapper">
-  <a class="govuk-back-link" href="/change-status">Back</a>
+  <a class="govuk-back-link" href="/change-status/{{ org.slug }}">Back</a>
 
-  <form action="/merge-options-route" method="post" class="form">
+  <form action="/merge-options-route/{{ org.slug }}" method="post" class="form">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <div class="govuk-form-group">
@@ -19,19 +19,35 @@
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="merge-options-1" name="merge_options" type="radio" value="yes">
                 <label class="govuk-label govuk-radios__label" for="merge-options-1">
-                Create new organisation
-                <span id="changed-name-hint" class="govuk-hint">
-                  End [org_1], [org_2] and [current_org] and create a new organisation to supercede them
-                </span>
+                  <span class="govuk-label--s">Create new organisation</span>
+
+                  <p>End
+                  {% if data['merge_organisations_data'] | is_string %}
+                    {{ data['merge_organisations_data'] }}
+                  {% else %}
+                    {% for org in data['merge_organisations_data'] %}
+                      {{ org }}{% if loop.last == false %}, {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  and {{ org.title }} and create a new organisation to supercede them</p>
+
               </label>
               </div>
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="merge-options-2" name="merge_options" type="radio" value="no">
                 <label class="govuk-label govuk-radios__label" for="merge-options-2">
-                Merge organisations into [current_org]
-                <span id="changed-name-hint" class="govuk-hint">
-                  End [org_1] and [org_2] and set [current_org] as the superceding organisation
-                </span>
+                  <span class="govuk-label--s">Merge organisations into {{ org.title }}</span>
+
+                  <p>End
+                  {% if data['merge_organisations_data'] | is_string %}
+                    {{ data['merge_organisations_data'] }}
+                  {% else %}
+                    {% for org in data['merge_organisations_data'] %}
+                      {{ org }}{% if loop.last == false %}, {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  and set {{ org.title }} as the superceding organisation</p>
+
               </label>
               </div>
             </div>

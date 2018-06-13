@@ -3,9 +3,9 @@
 
 {% block content %}
 <main role="main" class="govuk-main-wrapper">
-  <a class="govuk-back-link" href="/merge-organisation">Back</a>
+  <a class="govuk-back-link" href="/merge-organisation/{{ org.slug }}">Back</a>
 
-  <form action="/confirm-replace" method="post" class="form">
+  <form action="/confirm-merge/{{ org.slug }}" method="post" class="form">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
@@ -13,19 +13,33 @@
         </h1>
 
         <p>
-          You are about to merge [current org] with the following organisations
+          You are about to merge {{ org.title }} with the following organisations
         </p>
 
         <h2 class="govuk-heading-m">Organisations to merge</h2>
 
-        <ul class="govuk-list">s
-          {% for org in data['replacement_organisations_data'] %}
-            <li>{{ org }}</li>
-          {% endfor %}
+        <ul class="govuk-list">
+          {% if data['merge_organisations_data'] | is_string %}
+            <li>{{ data['merge_organisations_data'] }}</li>
+          {% else %}
+            {% for org in data['merge_organisations_data'] %}
+              <li>{{ org }}</li>
+            {% endfor %}
+          {% endif %}
         </ul>
 
+        <p>Once published this will close
+          {% if data['merge_organisations_data'] | is_string %}
+            {{ data['merge_organisations_data'] }}
+          {% else %}
+            {% for org in data['merge_organisations_data'] %}
+              {{ org }}{% if loop.last == false %}, {% else %} and {% endif %}
+            {% endfor %}
+          {% endif %}
+          and will reassign the content and roles to {{ org.title }}.</p>
+
         {{ govukButton({
-          "text": "Replace organisation"
+          "text": "Merge organisation"
         })}}
       </div>
     </div>

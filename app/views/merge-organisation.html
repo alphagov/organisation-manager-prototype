@@ -3,9 +3,9 @@
 
 {% block content %}
 <main role="main" class="govuk-main-wrapper">
-  <a class="govuk-back-link" href="/change-status">Back</a>
+  <a class="govuk-back-link" href="/change-status/{{ org.slug }}">Back</a>
 
-  <form action="/merge-options" method="post" class="form">
+  <form action="/merge-options/{{ org.slug }}" method="post" class="form">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
@@ -13,7 +13,7 @@
         </h1>
 
         <p>
-          Select one or more organisations to merge with [current org]
+          Select one or more organisations to merge with {{ org.title }}
         </p>
       </div>
     </div>
